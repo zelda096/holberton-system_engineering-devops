@@ -1,2 +1,2 @@
 #!/bin/bash
-chown --from holberton hello
+chgrp holberton hello
