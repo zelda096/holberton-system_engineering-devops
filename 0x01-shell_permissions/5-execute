@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo 764 hello
+chmod u+x hello
