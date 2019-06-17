@@ -1,2 +1,2 @@
 #!/bin/bash
-export TRUEKNOWLEDGE + 128
+echo export TRUEKNOWLEDGE + 128
