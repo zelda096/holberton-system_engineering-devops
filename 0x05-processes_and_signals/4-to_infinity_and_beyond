@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#script that displays To infinity and beyond indefinitely every 2 seconds.
+count=3
+while [ $count -gt 0 ]
+do
+	echo To infinity and beyond
+	let count++
+	sleep 2
+done
