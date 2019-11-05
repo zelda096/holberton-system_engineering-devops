@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#blabla
+count=1
+while [ $count -gt 0 ]
+do
+	echo "To infinity and beyond"
+	sleep 2
+	trap "echo I am invincible!!!" SIGTERM
+	let count++
+done
