@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#good the rat
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo service nginx start
+myHostName="$(cat /etc/hostname)"
+forChange="http {\n\tadd_header X-Served-By $myHostName;\n"
+sed -i "s/http {/$forChange/" /etc/nginx/nginx.conf
+sudo service nginx restart
