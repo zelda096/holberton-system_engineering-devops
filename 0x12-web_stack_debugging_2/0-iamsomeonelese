@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# changing user and showing
+sudo -u "$1" -H sh -c "whoami; exit"
