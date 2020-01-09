@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# try number 3
+chmod 777 /etc/nginx/nginx.conf
+sudo pkill apache2
+sudo sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+sudo -su nginx service nginx start
+© 2020 GitHub, Inc.
