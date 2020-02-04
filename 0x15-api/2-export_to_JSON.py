@@ -1,43 +1,31 @@
 #!/usr/bin/python3
 """For a given employee ID, returns JSON"""
 
+import json
+import requests
+import sys
+
+
 if __name__ == "__main__":
-    """ __main__ """
-
-    import collections
-    import csv
-    import json
-    import sys
-    import requests
-
-    if len(sys.argv) != 2:
-        exit(1)
-
     url = 'https://jsonplaceholder.typicode.com/'
-    empID = sys.argv[1]
 
-    urlUser = url + 'users/' + empID
-    urlTodos = url + 'todos?userId=' + empID
+    userid = sys.argv[1]
+    user = '{}users/{}'.format(url, userid)
+    res = requests.get(user)
+    json_o = res.json()
+    name = json_o.get('username')
 
-    user = requests.get(urlUser).json()
-    todos = requests.get(urlTodos).json()
+    todos = '{}todos?userId={}'.format(url, userid)
+    res = requests.get(todos)
+    tasks = res.json()
+    l_task = []
+    for task in tasks:
+        dict_task = {"task": task.get('title'),
+                     "completed": task.get('completed'),
+                     "username": name}
+        l_task.append(dict_task)
 
-    if (len(user) == 0):
-        exit(1)
-
-    username = user.get("username")
-
-    data = collections.OrderedDict()
-    values = []
-
-    for todo in todos:
-        t = collections.OrderedDict()
-        t["task"] = todo.get("title")
-        t["completed"] = todo.get("completed")
-        t["username"] = username
-        values.append(t)
-        data[empID] = values
-
-    fp = empID + ".csv"
-    with open(fp, "w") as fp:
-        fp.write(json.dumps(data))
+    d_task = {str(userid): l_task}
+    filename = '{}.json'.format(userid)
+    with open(filename, mode='w') as f:
+        json.dump(d_task, f)
